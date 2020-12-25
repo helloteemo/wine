@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"reflect"
 )
@@ -38,8 +37,8 @@ var (
 	ginContextType = reflect.TypeOf(&gin.Context{})
 )
 
-// Wine 中间件使用
-func Wine(handlerFunc interface{}) gin.HandlerFunc {
+// Drink 中间件使用
+func Drink(handlerFunc interface{}) gin.HandlerFunc {
 	handlerFuncType := reflect.TypeOf(handlerFunc)
 	if handlerFuncType.Kind() != reflect.Func {
 		panic("handler need func but got " + handlerFuncType.Name())
@@ -70,7 +69,6 @@ func Wine(handlerFunc interface{}) gin.HandlerFunc {
 				// 默认是参数
 				param = reflect.New(reqType).Interface()
 				if err := c.ShouldBind(param); err != nil {
-					log.Printf("bind err:%v", err)
 					c.JSON(http.StatusOK, gin.H{"errno": BindingErrorCode, "errmsg": BindingErrorMsg})
 					return
 				}

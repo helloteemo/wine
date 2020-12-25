@@ -13,8 +13,8 @@ type User struct {
 
 func main() {
 	g := gin.Default()
-	g.GET("/error", wine.Wine(Error))
-	g.POST("/print", wine.Wine(Print))
+	g.GET("/error", wine.Drink(Error))
+	g.POST("/print", wine.Drink(Print))
 	g.Run(":9898")
 }
 
